@@ -36,7 +36,7 @@ function Navbar() {
 
         <div className="flex items-center sm:space-x-2">
           <Link
-            href="/login"
+            href="/sign-in"
             className="flex items-center space-x-2 mr-4 sm:mr-0"
           >
             <AiOutlineUser className="text-fm-6" size={20} />
