@@ -4,7 +4,7 @@ import Image from "next/image";
 import logo from "@/public/Logo.svg";
 import { Input } from "./ui/input";
 import navItems from "@/utils/navItems";
-import { navCategories } from "@/types/navItems";
+import { NavCategories } from "@/types/navItems";
 import { GoLocation } from "react-icons/go";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import { useState } from "react";
@@ -78,7 +78,7 @@ function Navbar() {
             </button>
           </div>
           <div className="flex flex-wrap justify-between mt-4">
-            {navItems.map((category: navCategories) => (
+            {navItems.map((category: NavCategories) => (
               <Link
                 key={category.id}
                 href={category.href}
@@ -92,7 +92,7 @@ function Navbar() {
       </div>
 
       <div className="hidden md:flex justify-evenly items-center space-x-2 mt-4">
-        {navItems.map((category: navCategories) => (
+        {navItems.map((category: NavCategories) => (
           <Link
             key={category.id}
             href={category.href}
