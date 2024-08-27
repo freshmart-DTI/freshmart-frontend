@@ -66,7 +66,7 @@ function SignIn() {
           </div>
 
           <Link href="/">
-            <button className="w-full p-4 bg-fm-2 rounded-lg">Log in</button>
+            <button className="w-full p-4 bg-fm-2 rounded-lg">Log In</button>
           </Link>
 
           <p className="mt-4 text-center text-fm-t1">
