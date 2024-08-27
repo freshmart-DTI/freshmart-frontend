@@ -22,9 +22,14 @@ const SidebarItem = ({
   link,
   subItems,
 }: SidebarItemProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const pathname = usePathname();
+
+  const isActive = link && pathname === link;
+  const isSubItemActive =
+    subItems && subItems.some((subItem) => pathname === subItem.link);
+
+  const [isOpen, setIsOpen] = useState(isSubItemActive || false);
+
   const handleToggle = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (subItems) {
       e.preventDefault();
@@ -32,16 +37,15 @@ const SidebarItem = ({
     }
   };
 
-  const isActive = link && pathname === link;
-
   return (
-    <div>
+    <div className='space-y-1'>
       <Link
         href={link || '#'}
         onClick={handleToggle}
         className={cn(
           'w-full bg-transparent px-4 py-3 flex items-center justify-between gap-x-2 text-sm rounded-lg hover:bg-neutral-200 transition',
-          isActive && 'bg-gradient-to-r from-[#4C873D] to-[#68AB57] text-white'
+          isActive && 'bg-gradient-to-r from-[#4C873D] to-[#68AB57] text-white',
+          isSubItemActive && 'bg-neutral-200'
         )}>
         <div className='flex items-center gap-x-2'>
           <Icon className='size-5' />
@@ -54,15 +58,16 @@ const SidebarItem = ({
         )}
       </Link>
       {isOpen && subItems && (
-        <div>
+        <div className='space-y-1'>
           {subItems.map((subItem, index) => {
+            const subItemActive = pathname === subItem.link;
             return (
               <Link
                 key={index}
                 href={subItem.link}
                 className={cn(
                   'w-full bg-transparent pl-8 pr-4 py-3 flex items-center gap-x-2 text-sm rounded-lg hover:bg-neutral-200 transition',
-                  isActive &&
+                  subItemActive &&
                     'bg-gradient-to-r from-[#4C873D] to-[#68AB57] text-white'
                 )}>
                 <Circle className='size-3' />

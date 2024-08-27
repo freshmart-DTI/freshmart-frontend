@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronRight, LayoutDashboard } from 'lucide-react';
+import { ChevronRight, LayoutDashboard, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SidebarItem from './SidebarItem';
@@ -18,25 +18,28 @@ const Sidebar = () => {
       <div className='mt-10 space-y-1'>
         <SidebarItem title='Dashboard' icon={LayoutDashboard} link='/admin' />
         <SidebarItem
-          title='Dashboard'
-          icon={LayoutDashboard}
-          subItems={[{ title: 'Add Product', link: '/admin/product/add' }]}
+          title='Product'
+          icon={ShoppingCart}
+          subItems={[
+            { title: 'All Products', link: '/admin/product' },
+            { title: 'Add Product', link: '/admin/product/add' },
+          ]}
         />
-        <Link
+        {/* <Link
           href='/admin/dashboard'
           className='bg-gradient-to-r from-[#4C873D] to-[#68AB57] px-4 py-3 flex items-center justify-between gap-x-2 text-sm text-white rounded-lg hover:opacity-75 transition'>
           <div className='flex items-center gap-x-2'>
             <LayoutDashboard className='size-5' />
             Dashboard
           </div>
-        </Link>
-        <button className='w-full bg-transparent px-4 py-3 flex items-center justify-between gap-x-2 text-sm rounded-lg hover:bg-neutral-200 transition'>
+        </Link> */}
+        {/* <button className='w-full bg-transparent px-4 py-3 flex items-center justify-between gap-x-2 text-sm rounded-lg hover:bg-neutral-200 transition'>
           <div className='flex items-center gap-x-2'>
             <LayoutDashboard className='size-5' />
             Products
           </div>
           <ChevronRight className='size-5' />
-        </button>
+        </button> */}
       </div>
     </div>
   );
