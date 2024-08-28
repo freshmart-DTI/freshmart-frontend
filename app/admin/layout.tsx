@@ -5,7 +5,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='bg-neutral-100'>
       <Sidebar />
-      <div className='lg:ml-64'>
+      <div className='lg:ml-64 p-6'>
         <Header />
         {children}
       </div>
