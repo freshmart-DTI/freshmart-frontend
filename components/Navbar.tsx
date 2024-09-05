@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "@/public/Logo.svg";
 import { Input } from "./ui/input";
 import navItems from "@/utils/navItems";
+import CartSidebar from "./CartSidebar";
 import { NavCategories } from "@/types/navItems";
 import { GoLocation } from "react-icons/go";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
@@ -12,6 +13,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 
 function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
 
   return (
     <nav className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -43,10 +45,14 @@ function Navbar() {
             <span className="hidden sm:block text-fm-t1">Login</span>
           </Link>
           <div className="hidden sm:block text-fm-6">|</div>
-          <Link href="/cart" className="flex items-center space-x-2">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="flex items-center space-x-2"
+          >
             <AiOutlineShoppingCart className="text-fm-6" size={20} />
             <span className="hidden sm:block text-fm-t1">Cart</span>
-          </Link>
+          </button>
+
           <button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className="ml-4 md:hidden"
@@ -102,6 +108,10 @@ function Navbar() {
           </Link>
         ))}
       </div>
+      <CartSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
     </nav>
   );
 }

@@ -23,7 +23,7 @@ function Product() {
           <ProductCard key={item.id} {...item} />
         ))}
       </div>
-      <div className="flex justify-center mt-4 pb-12">
+      <div className="flex justify-center mt-4 pb-4">
         <button className="w-1/2 btn-anim flex items-center justify-center text-fm-t2 px-4 py-2 rounded-3xl bg-fm-1">
           Load More
         </button>
