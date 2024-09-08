@@ -1,6 +1,15 @@
 'use client';
 
-import { ChevronRight, LayoutDashboard, ShoppingCart } from 'lucide-react';
+import {
+  ChartArea,
+  ChevronRight,
+  LayoutDashboard,
+  Package,
+  ReceiptText,
+  ShoppingCart,
+  SquarePercent,
+  Store,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SidebarItem from './SidebarItem';
@@ -17,12 +26,38 @@ const Sidebar = () => {
       />
       <div className='mt-10 space-y-1'>
         <SidebarItem title='Dashboard' icon={LayoutDashboard} link='/admin' />
+        <SidebarItem title='Order' icon={ReceiptText} link='/admin/order' />
+        <SidebarItem
+          title='Store'
+          icon={Store}
+          subItems={[
+            { title: 'Manage Store', link: '/admin/store' },
+            { title: 'Add Store', link: '/admin/store/add' },
+          ]}
+        />
         <SidebarItem
           title='Product'
           icon={ShoppingCart}
           subItems={[
             { title: 'All Products', link: '/admin/product' },
             { title: 'Add Product', link: '/admin/product/add' },
+          ]}
+        />
+        <SidebarItem
+          title='Discount'
+          icon={SquarePercent}
+          subItems={[
+            { title: 'Manage Discount', link: '/admin/discount' },
+            { title: 'Create Discount', link: '/admin/discount/add' },
+          ]}
+        />
+        <SidebarItem title='Inventory' icon={Package} link='/admin/inventory' />
+        <SidebarItem
+          title='Report & Analysis'
+          icon={ChartArea}
+          subItems={[
+            { title: 'Sales Report', link: '/admin/report/sales' },
+            { title: 'Stock Report', link: '/admin/report/stock' },
           ]}
         />
         {/* <Link
