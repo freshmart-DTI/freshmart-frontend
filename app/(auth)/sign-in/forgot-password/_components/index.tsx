@@ -33,7 +33,7 @@ function ForgotPassword() {
           </div>
 
           <Link href="/sign-in/forgot-password/confirm-password">
-            <button className="w-full p-4 bg-fm-2 rounded-lg">
+            <button className="w-full p-4 bg-fm-2 rounded-lg hover:bg-fm-3">
               Request Password Reset
             </button>
           </Link>

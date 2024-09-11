@@ -34,7 +34,7 @@ function ConfirmPassword() {
           </div>
 
           <Link href="/">
-            <button className="w-full p-4 bg-fm-2 rounded-lg">
+            <button className="w-full p-4 bg-fm-2 rounded-lg hover:bg-fm-3">
               Change Password
             </button>
           </Link>
