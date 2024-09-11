@@ -24,7 +24,7 @@ function Product() {
         ))}
       </div>
       <div className="flex justify-center mt-4 pb-4">
-        <button className="w-1/2 btn-anim flex items-center justify-center text-fm-t2 px-4 py-2 rounded-3xl bg-fm-1">
+        <button className="w-1/2 btn-anim flex items-center justify-center text-fm-t2 px-4 py-2 rounded-3xl bg-fm-1 hover:bg-fm-3">
           Load More
         </button>
       </div>
