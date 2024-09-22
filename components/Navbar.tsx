@@ -10,10 +10,12 @@ import { GoLocation } from "react-icons/go";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import DeliveryModal from "./DeliveryModal";
 
 function Navbar() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [isDeliveryModalOpen, setDeliveryModalOpen] = useState<boolean>(false);
 
   return (
     <nav className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -28,7 +30,10 @@ function Navbar() {
             placeholder="Search products"
             className="bg-fm-1 w-72 p-4 rounded-3xl border-none focus-visible:ring-transparent"
           />
-          <button className="w-64 bg-fm-1 p-2 rounded-3xl flex-center space-x-2">
+          <button
+            className="w-64 bg-fm-1 p-2 rounded-3xl flex-center space-x-2"
+            onClick={() => setDeliveryModalOpen(true)}
+          >
             <GoLocation />
             <span className="text-fm-t1 text-sm">
               Deliver to <span className="font-bold">NONGSA</span>
@@ -74,9 +79,12 @@ function Navbar() {
             <Input
               type="search"
               placeholder="Search products"
-              className="bg-fm-1 w-full p-4 rounded-3xl border-none focus-visible:ring-transparent mb-4"
+              className="bg-fm-1 w-full p-4 rounded-3xl border-none focus-visible:ring-transparent"
             />
-            <button className="w-full bg-fm-1 p-2 rounded-3xl flex items-center justify-center space-x-2 mb-4">
+            <button
+              className="w-full bg-fm-1 p-2 rounded-3xl flex-center space-x-2"
+              onClick={() => setDeliveryModalOpen(true)}
+            >
               <GoLocation />
               <span className="text-fm-t1 text-sm">
                 Deliver to <span className="font-bold">NONGSA</span>
@@ -111,6 +119,10 @@ function Navbar() {
       <CartSidebar
         isOpen={isSidebarOpen}
         onClose={() => setSidebarOpen(false)}
+      />
+      <DeliveryModal
+        isOpen={isDeliveryModalOpen}
+        onClose={() => setDeliveryModalOpen(false)}
       />
     </nav>
   );
