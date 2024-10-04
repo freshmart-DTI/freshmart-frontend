@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
+import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-
-  title: "Freshmart",
-  description: "E-Grocery Website",
-
+  title: 'Freshmart',
+  description: 'E-Grocery Website',
 };
 
 export default function RootLayout({
@@ -18,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={openSans.className}>{children}</body>
+      <body className={openSans.className}>
+        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+      </body>
     </html>
   );
 }
