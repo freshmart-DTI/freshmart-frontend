@@ -11,3 +11,8 @@ interface ProductImage {
   id: string;
   url: string;
 }
+
+interface ProductWithInventory extends ProductType {
+  stock: number;
+  storeId: string;
+}

@@ -2,12 +2,18 @@
 
 import ProductCard from '@/components/ProductCard';
 import { useProducts } from '@/hooks/useProducts';
+import { useStoreProducts } from '@/hooks/useStoreProducts';
 import { ProductType } from '@/types/Product';
+import { useEffect, useState } from 'react';
+
+interface Location {
+  latitude: number;
+  longitude: number;
+}
 
 function Product() {
-  const { data, isLoading, error } = useProducts();
-
-  const products = data?.content as ProductType[];
+  const { data, isLoading, error } = useStoreProducts();
+  const [location, setLocation] = useState<Location | null>(null);
 
   return (
     <div className='max-w-7xl mx-auto sm:px-6 md:px-8 py-4'>
@@ -26,7 +32,7 @@ function Product() {
       </div>
       <hr className='text-fm-2'></hr>
       <div className='px-4 pt-8 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
-        {products?.map((item) => (
+        {data?.products.map((item) => (
           <ProductCard key={item.id} {...item} />
         ))}
       </div>
