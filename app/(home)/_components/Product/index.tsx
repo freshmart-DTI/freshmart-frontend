@@ -13,7 +13,14 @@ interface Location {
 
 function Product() {
   const { data, isLoading, error } = useStoreProducts();
-  const [location, setLocation] = useState<Location | null>(null);
+
+  if (isLoading) {
+    return (
+      <div className='w-full h-64 flex items-center justify-center'>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className='max-w-7xl mx-auto sm:px-6 md:px-8 py-4'>
