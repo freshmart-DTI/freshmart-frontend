@@ -1,12 +1,14 @@
 'use client';
 
-import { ChevronLeft, ChevronRight, Edit, Trash2 } from 'lucide-react';
-import TableRow from './_components/TableRow';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
+import Table from '../_components/Table';
 
 const AdminProductPage = () => {
   const { data, isLoading } = useProducts();
   console.log(data);
+
+  const columns = ['Name', 'Category', 'Price'];
 
   if (isLoading) {
     return (
@@ -21,24 +23,7 @@ const AdminProductPage = () => {
       <div className='p-6'>
         <input />
       </div>
-      <table className='w-full'>
-        <thead>
-          <tr className='border-y border-neutral-200 h-16 text-left text-sm text-neutral-500 font-semibold'>
-            <th className='px-6'>
-              <input type='checkbox' />
-            </th>
-            <th>NAME</th>
-            <th>CATEGORY</th>
-            <th>PRICE</th>
-            <th className='pr-6'></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.content.map((product) => (
-            <TableRow key={product.id} product={product} />
-          ))}
-        </tbody>
-      </table>
+      <Table columns={columns} data={data?.content} />
       <div className='flex items-start justify-between px-6 py-4'>
         <p className='text-sm text-neutral-500'>
           Displaying 1 to 6 of 100 entries

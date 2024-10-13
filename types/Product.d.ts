@@ -16,3 +16,8 @@ interface ProductWithInventory extends ProductType {
   stock: number;
   storeId: string;
 }
+
+interface Category {
+  id: string;
+  name: string;
+}
