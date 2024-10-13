@@ -1,8 +1,21 @@
+'use client';
+
 import { ChevronLeft, ChevronRight, Edit, Trash2 } from 'lucide-react';
-import Image from 'next/image';
 import TableRow from './_components/TableRow';
+import { useProducts } from '@/hooks/useProducts';
 
 const AdminProductPage = () => {
+  const { data, isLoading } = useProducts();
+  console.log(data);
+
+  if (isLoading) {
+    return (
+      <div className='h-32 bg-white w-full flex items-center justify-center rounded-lg'>
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div className='bg-white rounded-lg'>
       <div className='p-6'>
@@ -21,11 +34,9 @@ const AdminProductPage = () => {
           </tr>
         </thead>
         <tbody>
-          <TableRow />
-          <TableRow />
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          {data?.content.map((product) => (
+            <TableRow key={product.id} product={product} />
+          ))}
         </tbody>
       </table>
       <div className='flex items-start justify-between px-6 py-4'>
