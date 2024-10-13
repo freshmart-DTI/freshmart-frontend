@@ -10,7 +10,7 @@ const Table = ({ columns, data }: TableProps) => {
     <table className='w-full'>
       <thead>
         <tr className='border-y border-neutral-200 h-16 text-left text-sm text-neutral-500 font-semibold'>
-          <th className='px-6'>
+          <th className='px-6 w-16'>
             <input type='checkbox' />
           </th>
           {columns.map((column) => (
