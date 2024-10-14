@@ -13,8 +13,10 @@ const Table = ({ columns, data }: TableProps) => {
           <th className='px-6 w-16'>
             <input type='checkbox' />
           </th>
-          {columns.map((column) => (
-            <th className='uppercase'>{column}</th>
+          {columns.map((column, i) => (
+            <th key={i} className='uppercase'>
+              {column}
+            </th>
           ))}
           <th className='pr-6'></th>
         </tr>
