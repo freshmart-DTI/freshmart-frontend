@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider';
+import { Toaster } from 'react-hot-toast';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={openSans.className}>
         <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+        <Toaster />
       </body>
     </html>
   );

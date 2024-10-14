@@ -1,7 +1,10 @@
 import { useQuery } from 'react-query';
 import { useSearchParams } from 'next/navigation';
+import { ProductType } from '@/types/Product';
 
-const fetchProducts = async (queryString: string) => {
+const fetchProducts = async (
+  queryString: string
+): Promise<PagedResponse<ProductType>> => {
   const response = await fetch(
     `http://localhost:8080/api/v1/products?${queryString}`
   );
