@@ -3,6 +3,7 @@
 import {
   ChartArea,
   ChevronRight,
+  Folder,
   LayoutDashboard,
   Package,
   ReceiptText,
@@ -41,6 +42,14 @@ const Sidebar = () => {
           subItems={[
             { title: 'All Products', link: '/admin/product' },
             { title: 'Add Product', link: '/admin/product/add' },
+          ]}
+        />
+        <SidebarItem
+          title='Category'
+          icon={Folder}
+          subItems={[
+            { title: 'All Categories', link: '/admin/category' },
+            { title: 'Add Category', link: '/admin/category/add' },
           ]}
         />
         <SidebarItem

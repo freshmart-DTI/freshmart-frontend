@@ -1,29 +1,29 @@
 'use client';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useProducts } from '@/hooks/useProducts';
 import Table from '../_components/Table';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useStores } from '@/hooks/useStores';
 
-const AdminProductPage = () => {
-  const { data, isLoading } = useProducts();
-  console.log(data);
-
-  const columns = ['Name', 'Category', 'Price'];
+const AdminStorePage = () => {
+  const columns = ['Name', 'Province', 'City'];
+  const { data, isLoading } = useStores();
 
   if (isLoading) {
     return (
-      <div className='h-32 bg-white w-full flex items-center justify-center rounded-lg'>
+      <div className='h-16 w-full flex items-center justify-center'>
         Loading...
       </div>
     );
   }
+
+  console.log(data);
 
   return (
     <div className='bg-white rounded-lg'>
       <div className='p-6'>
         <input />
       </div>
-      <Table columns={columns} data={data?.content} />
+      <Table columns={columns} data={data} />
       <div className='flex items-start justify-between px-6 py-4'>
         <p className='text-sm text-neutral-500'>
           Displaying 1 to 6 of 100 entries
@@ -53,4 +53,4 @@ const AdminProductPage = () => {
   );
 };
 
-export default AdminProductPage;
+export default AdminStorePage;

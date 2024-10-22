@@ -1,11 +1,7 @@
-import Confirm from "./_components";
+import Confirm from './_components/Confirm';
 
-function page() {
-  return (
-    <div>
-      <Confirm />
-    </div>
-  );
+function ConfirmPage() {
+  return <Confirm />;
 }
 
-export default page;
+export default ConfirmPage;

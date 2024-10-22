@@ -1,11 +1,7 @@
-import SignIn from "./_components";
+import SignIn from './_components/SignIn';
 
-function page() {
-  return (
-    <div>
-      <SignIn />
-    </div>
-  );
+function SignInPage() {
+  return <SignIn />;
 }
 
-export default page;
+export default SignInPage;
