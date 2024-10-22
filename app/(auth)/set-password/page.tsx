@@ -1,14 +1,16 @@
 'use client';
-import logo from '@/public/Logo.svg';
+
+import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FcGoogle } from 'react-icons/fc';
+import React from 'react';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { BsFacebook } from 'react-icons/bs';
-import { Input } from '@/components/ui/input';
+import logo from '@/public/Logo.svg';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from 'react-query';
 import {
   Form,
   FormControl,
@@ -16,56 +18,62 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { useMutation } from 'react-query';
-import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-const formSchema = z.object({
-  email: z.string().email(),
-});
+const formSchema = z
+  .object({
+    email: z.string().email(),
+    password: z.string().min(8, 'Password must be at least 8 characters long'),
+    confirmPassword: z
+      .string()
+      .min(8, 'Confirm Password must be at least 8 characters long'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords must match',
+    path: ['confirmPassword'],
+  });
 
-function SignUp() {
+const SetPasswordPage = () => {
+  const searchParams = useSearchParams();
+  const email = searchParams.get('email');
   const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
+      email: email || '',
+      password: '',
+      confirmPassword: '',
     },
   });
 
-  const { mutate } = useMutation({
-    mutationFn: async (data: z.infer<typeof formSchema>) => {
+  const mutation = useMutation({
+    mutationFn: async (values: { password: string; email: string }) => {
       const response = await fetch(
-        'http://localhost:8080/api/v1/users/register',
+        `http://localhost:8080/api/v1/users/set-password`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(values),
         }
       );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to sign up');
-      }
 
       return response.json();
     },
     onSuccess: () => {
-      toast.success(
-        'Registration successful! Check your email to complete the process.'
-      );
-      router.push('/');
+      toast.success('Password set successfully! You can now log in.');
+      router.push('/sign-in');
     },
     onError: (error: any) => {
-      toast.error(error.message || 'An error occured during sign-up');
+      console.error(error);
+      toast.error('Failed to set password. Please try again.');
     },
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    mutate(values);
+    mutation.mutate(values);
   };
 
   return (
@@ -75,7 +83,7 @@ function SignUp() {
           <Image
             src={logo}
             alt='Freshmart Logo'
-            className='mb-4 mx-auto sm:mx-0 size-64'
+            className='mb-4 mx-auto sm:mx-0 size-40 sm:size-64'
           />
         </div>
       </div>
@@ -89,40 +97,30 @@ function SignUp() {
           <h2 className='text-3xl font-bold mb-6 text-center sm:text-left'>
             Create Account
           </h2>
-          <div className='flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-6 text-sm'>
-            <button>
-              <div className='p-4 border border-fm-6 rounded-lg'>
-                <div className='btn-anim flex-center space-x-2'>
-                  <span>Sign up with </span>
-                  {<FcGoogle size={20} />}
-                </div>
-              </div>
-            </button>
-            <button>
-              <div className='p-4 border border-fm-6 rounded-lg'>
-                <div className='btn-anim flex-center space-x-2'>
-                  <span>Sign up with </span>
-                  {<BsFacebook size={20} />}
-                </div>
-              </div>
-            </button>
-          </div>
-
-          <div className='flex items-center mb-6'>
-            <hr className='flex-1 border-fm-t2' />
-            <span className='px-4 text-fm-t1'>OR</span>
-            <hr className='flex-1 border-fm-t2' />
-          </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className='py-4 space-y-4'>
               <FormField
                 control={form.control}
-                name='email'
+                name='password'
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder='Enter your e-mail' {...field} />
+                      <Input placeholder='Enter your password' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='confirmPassword'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder='Confirm your password' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -147,6 +145,6 @@ function SignUp() {
       </div>
     </div>
   );
-}
+};
 
-export default SignUp;
+export default SetPasswordPage;
