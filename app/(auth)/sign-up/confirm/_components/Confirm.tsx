@@ -54,8 +54,18 @@ function Confirm() {
   });
 
   useEffect(() => {
-    mutation.mutate();
-  }, [mutation]);
+    // Only trigger mutation if token and email are present
+    if (token && email && !mutation.isLoading) {
+      mutation.mutate();
+    }
+  }, [token, email, mutation]);
+
+  // Effect to handle navigation after mutation
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      router.push(`/set-password?email=${email}`);
+    }
+  }, [mutation.isSuccess, email, router]);
 
   return (
     <div className='h-screen w-screen flex items-center justify-center'>
